@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=VirtualBox Manager
+Comment=Starts the VirtualBox manager
+Type=Application
+Exec=/usr/lib/virtualbox/VirtualBox
+Icon=virtualbox-vbox.png

@@ -1,0 +1,62 @@
+#!/bin/bash 
+# Script for starting VM from GDM
+#
+# $Id$
+# $Revision$
+# $Tags$
+
+#
+# Start a VM if not interrupted by Space Bar 
+#
+
+# Log all output, good with bash -x
+#exec >/tmp/Virtual-Machine.log 2>&1
+
+# Set some parameters
+: ${VM:="${@:-'Virtual Machine'}"}        # Name of VM to start
+: ${TIMEOUT:=2}                           # Time to wait for the key press
+: ${KEYMESSAGE:='Press and release the \e[32mSpace Bar\e[0m to go to the login screen in %d seconds. '}
+: ${MESSAGESIZE:=12}                      # Message font size
+: ${MESSAGECOLOR:='-bg black -fg white -cr black'}  # Message colors
+: ${KEYCODE:='keycode 65'}                # Keycode of the Space Bar
+
+# Make sure /usr/local/bin is front of PATH for priority wrapper
+export PATH="/usr/local/bin:$PATH"
+
+# Wait for a key press and kill the whole process if one comes
+function die-on-key-press () {
+  
+  # Make a subprocess that watches the X events for a KEYCODE and if
+  # it find on commit patricide.
+  (xev -event keyboard -root | grep -m 1 "$KEYCODE" && kill $1) &
+  eventscanner=$!
+
+  # If xterm is available show the message.  Wait long enough to get
+  #   the key press.
+  xterm -fullscreen     $MESSAGECOLOR    \
+        -fa 'Monospace' -fs $MESSAGESIZE \
+        -e "stty -echo
+            for i in $(seq -s' ' 1 $TIMEOUT); do
+              sleep 1 &     # Light a 1 second fuse
+              fuse=\$!
+              clear
+              read -s -n 1 -t 1 \\
+                   -p \"\$(printf '$KEYMESSAGE' \$(($TIMEOUT-\$i+1)))\"
+              wait \$fuse   # Wait for the fuse to burn out
+              [ \"\$REPLY\" == ' ' ] && kill $1
+            done"
+  kill $eventscanner
+}
+
+
+# Wait for key press
+die-on-key-press $$
+
+# If we last this long start the VM
+VirtualBoxVM --comment "$VM" --startvm "$VM"
+
+# Wait for key press
+die-on-key-press $$
+
+# If we last this long do the shutdown
+exec shutdown -h now

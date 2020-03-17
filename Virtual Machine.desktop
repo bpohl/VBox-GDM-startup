@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.1
+Type=Application
+Icon=virtualbox-vbox.png
+Name=Virtual Machine
+Comment=Starts the VirtualBox machine named Virtual Machine
+Exec=./Virtual-Machine.Exec Virtual Machine
