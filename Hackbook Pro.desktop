@@ -1,8 +1,0 @@
-[Desktop Entry]
-Encoding=UTF-8
-Version=1.1
-Type=Application
-Icon=virtualbox-vbox.png
-Name=Hackbook Pro
-Comment=Starts the VirtualBox machine Hackbook Pro
-Exec=./Virtual-Machine.Exec Hackbook Pro

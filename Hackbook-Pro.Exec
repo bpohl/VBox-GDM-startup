@@ -1,8 +1,0 @@
-#!/bin/sh -x
-# Script for startng VM from GDM
-# $Id$
-# $Revision$
-# $Tags$
-
-export PATH="/usr/local/bin:$PATH"
-exec VirtualBoxVM --comment "Hackbook Pro" --startvm "Hackbook Pro"
