@@ -18,7 +18,7 @@ This repository contains two examples.
 
   [GDM](http://wiki.gnome.org/Projects/GDM) uses a rough version of the `.desktop` format files to define what kind of session to start when the user logs in.  Typically there is one made for each type of desktop and can be selected from a menu when logging in.
   
-  Edit `Virtual Machine.desktop` to change the `Name=` to what should be listed in the session menu and make `Comment=`   The `Exec=` attribute refers to the scrip, `Virtual-Machine.Exec`, on the user's home which starts the VM followed by the name of the VM as [VirtualBox](http://www.virtualbox.org/) knows it.  **Do not put the name in quotes** even if it has spaces.  (See notes on [Known Bugs](#Known Bugs) below.)
+  Edit `Virtual Machine.desktop` to change the `Name=` to what should be listed in the session menu and make `Comment=` something descriptive.  The `Exec=` attribute refers to the scrip, `Virtual-Machine.Exec`, on the user's home which starts the VM, followed by the name of the VM as [VirtualBox](http://www.virtualbox.org/) knows it.  **Do not put the name in quotes** even if it has spaces.  (See notes on [Known Bugs](#Known Bugs) below.)
 
   <pre>
   [Desktop Entry]
@@ -28,7 +28,7 @@ This repository contains two examples.
   Exec=./Virtual-Machine.Exec <i><b>Virtual Machine</b></i>
   </pre>
 
-  If there will be more than one VM set up, make a copy of `VirtualBox.desktop` to any name but keeping the `.desktop` extension.  The installer will use anything with `.desktop`.  In fact, `VirtualBox.desktop` can be renamed to something more descriptive of the VM.
+  If there will be more than one VM set up, make a copy of `Virtual Machine.desktop` to any name but keeping the `.desktop` extension.  The installer will use anything with `.desktop`.  In fact, `Virtual Machine.desktop` can be renamed to something more descriptive of the VM.
 
 * The other example is named `VirtualBox.desktop` and you may want to install as-is.  It adds to the session menu a startup of the [VirtualBox](http://www.virtualbox.org/) GUI.  It is handy to have if you need to tweak the VM.  It does not need a `.Exec` to go with it.
 
